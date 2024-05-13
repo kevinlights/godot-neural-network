@@ -1,5 +1,10 @@
 extends Control
 
+##############
+# 这种非黑即白的训练和预测不确定有什么意义
+#
+#
+#############
 var NeuralNetwork = preload("res://Neural Network/Brain.gd")
 
 onready var guess_right = $UI/Right/Top/Guess
@@ -47,10 +52,17 @@ func guess_color():
 	print(guesses)
 	if guesses[0] > guesses[1]:
 		guess_left.show()
+		print("guess it is white")
 	else:
 		guess_right.show()
-
-func reset():
+		print("guess it is black")
+# after click the button:
+# 1. hide the guess
+# 2. get random color
+# 3. show color in background for buttons
+# 4. use model to predict color
+# 5. then wait for next click to confirm
+func reset(): 
 	hide_quess()
 	pick_color()
 	change_background()
